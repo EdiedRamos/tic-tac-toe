@@ -1,0 +1,22 @@
+.score-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-self: center;
+  background-color: gold;
+  border-radius: 12px;
+  width: 100px;
+  min-width: 100px;
+  height: 70px;
+
+  p {
+    font-weight: bold;
+    color: black;
+    background-color: inherit;
+
+    &:last-child {
+      font-size: 1.5rem;
+    }
+  }
+}

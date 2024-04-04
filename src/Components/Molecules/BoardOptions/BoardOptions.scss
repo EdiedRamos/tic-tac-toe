@@ -1,0 +1,9 @@
+.board-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+
+  button {
+    justify-self: center;
+  }
+}

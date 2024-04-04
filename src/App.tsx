@@ -1,5 +1,12 @@
+import { BoardOptions, ScoreInfo } from "./Components/Molecules";
+
 const App = () => {
-  return <div>App</div>;
+  return (
+    <>
+      <BoardOptions />
+      <ScoreInfo />
+    </>
+  );
 };
 
 export default App;

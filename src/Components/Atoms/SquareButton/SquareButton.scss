@@ -1,0 +1,19 @@
+@import "/src/General/Styles/Colors/colors";
+
+.square-button {
+  border: none;
+  border-radius: 8px;
+  background-color: #27272a;
+  width: 100px;
+  height: 100px;
+
+  &:not(:disabled):hover {
+    cursor: pointer;
+    background-color: #3f3f46;
+  }
+
+  &:not(:disabled):active {
+    transform: scale(0.9);
+    box-shadow: none;
+  }
+}

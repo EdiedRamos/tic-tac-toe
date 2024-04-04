@@ -1,0 +1,23 @@
+@import "./Colors/colors";
+@import "./Fonts/fonts";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-color: $background;
+  font-family: $main-font;
+}
+
+.icon {
+  background-color: transparent;
+  font-size: 3rem;
+}
+
+.player-x {
+  color: white;
+}
+
+.player-o {
+  color: #006fee;
+}
