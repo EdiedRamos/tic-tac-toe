@@ -1,4 +1,4 @@
-import { BoardOptions, ScoreInfo } from "./Components/Molecules";
+import { BoardOptions, ScoreInfo } from "./components/molecules";
 
 const App = () => {
   return (

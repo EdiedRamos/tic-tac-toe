@@ -1,30 +1,18 @@
-import { ScoreLabel, SquareButton } from "@/Components/Atoms";
-
-import "./BoardOptions.scss";
-import { Icons } from "@/General/Icons";
 import { useEffect, useState } from "react";
+
+import { ScoreLabel, SquareButton } from "@/components/atoms";
+import { WINNING_MOVES } from "@/domain/constants";
+import { Icons } from "@/general/icons";
+
+import "./boardOptions.scss";
 
 const { LetterO, LetterX } = Icons;
 
-const winningMoves = [
-  [0, 1, 2],
-  [3, 4, 5],
-  [6, 7, 9],
-  [0, 3, 6],
-  [1, 4, 7],
-  [2, 5, 9],
-  [0, 4, 9],
-  [2, 4, 6],
-];
-
 const isThereAWinner = (board: Array<number>): number => {
-  for (const move of winningMoves) {
-    const diff = new Set();
-    for (const idx of move) {
-      diff.add(board[idx]);
-    }
-    if (diff.size === 1 && !!~board[move[0]]) {
-      return board[move[0]];
+  for (const move of WINNING_MOVES) {
+    const [a, b, c] = move;
+    if (board[a] === board[b] && board[b] === board[c] && ~board[a]) {
+      return board[a];
     }
   }
   return -1;
