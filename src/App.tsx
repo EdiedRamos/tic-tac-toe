@@ -1,12 +1,7 @@
-import { BoardOptions, ScoreInfo } from "./components/molecules";
+import { PageManager } from "./components/molecules";
 
 const App = () => {
-  return (
-    <>
-      <BoardOptions />
-      <ScoreInfo />
-    </>
-  );
+  return <PageManager />;
 };
 
 export default App;

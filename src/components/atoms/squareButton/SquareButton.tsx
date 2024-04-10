@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
-import "./squareButton.scss";
+import "./SquareButton.scss";
 
 type PropsType = {
   children?: ReactNode;

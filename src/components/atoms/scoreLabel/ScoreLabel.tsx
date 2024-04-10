@@ -1,4 +1,4 @@
-import "./scoreLabel.scss";
+import "./ScoreLabel.scss";
 
 type PropsType = {
   title: string;

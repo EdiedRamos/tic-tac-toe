@@ -1,5 +1,5 @@
 import { ScoreLabel } from "@/components/atoms";
-import "./scoreInfo.scss";
+import "./ScoreInfo.scss";
 
 export const ScoreInfo = () => {
   return <></>;

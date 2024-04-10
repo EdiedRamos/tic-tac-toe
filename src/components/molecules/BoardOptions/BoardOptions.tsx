@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
 import { ScoreLabel, SquareButton } from "@/components/atoms";
-import { WINNING_MOVES } from "@/domain/constants";
+import { WINNING_MOVES } from "@/utils/constants";
 import { Icons } from "@/general/icons";
 
-import "./boardOptions.scss";
+import "./BoardOptions.scss";
 
 const { LetterO, LetterX } = Icons;
 
