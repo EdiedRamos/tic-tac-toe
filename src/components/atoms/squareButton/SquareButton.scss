@@ -1,19 +1,20 @@
-@import "/src/general/styles/colors/colors";
+@import "/src/general/styles";
 
 .square-button {
+  box-shadow: 0 5px $color-shadow-soft;
   border: none;
   border-radius: 8px;
-  background-color: #27272a;
+  background-color: $color-brand-soft;
   width: 100px;
   height: 100px;
 
   &:not(:disabled):hover {
+    opacity: 0.7;
     cursor: pointer;
-    background-color: #3f3f46;
   }
 
   &:not(:disabled):active {
-    transform: scale(0.9);
+    transform: translateY(5px);
     box-shadow: none;
   }
 }
