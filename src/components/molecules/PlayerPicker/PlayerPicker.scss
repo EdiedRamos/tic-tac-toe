@@ -1,0 +1,53 @@
+@import "/src/general/styles";
+
+.player-picker__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: $border-radius-primary;
+  gap: 1rem;
+  background-color: $temporal;
+  padding: 1rem 0;
+
+  .picker__info,
+  .picker__tip {
+    background: inherit;
+    color: $color-text-primary;
+  }
+
+  .picker__selector {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    border-radius: $border-radius-primary;
+    background-color: $color-brand-primary;
+    padding: 1rem;
+    width: 90%;
+
+    button {
+      border: none;
+      border-radius: $border-radius-primary;
+      padding: 5px;
+      width: 50%;
+
+      svg {
+        font-size: 3.5rem;
+        color: $color-brand-quaternary;
+      }
+
+      &:hover {
+        cursor: pointer;
+        background-color: $color-brand-quaternary;
+
+        svg {
+          background-color: inherit;
+          color: $color-brand-primary;
+        }
+      }
+    }
+  }
+
+  .picker__tip {
+    color: $color-text-secondary;
+  }
+}

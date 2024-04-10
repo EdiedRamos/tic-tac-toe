@@ -1,0 +1,13 @@
+@import "/src/general/styles/colors/colors";
+
+.logo__container {
+  display: flex;
+  justify-content: center;
+  font-size: 3rem;
+  .letter-x {
+    color: $color-brand-secondary;
+  }
+  .letter-o {
+    color: $color-brand-ternary;
+  }
+}

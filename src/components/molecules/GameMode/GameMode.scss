@@ -1,0 +1,35 @@
+@import "/src/general/styles/";
+
+.game-mode__container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  .vs-cpu,
+  .vs-player {
+    border: none;
+    border-radius: $border-radius-secondary;
+    padding: 1rem;
+    font-weight: bold;
+    font-size: 1.25rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:active {
+      transform: translateY(10px);
+      box-shadow: none;
+    }
+  }
+
+  .vs-cpu {
+    box-shadow: 0 10px $color-shadow-ternary;
+    background-color: $color-brand-ternary;
+  }
+
+  .vs-player {
+    box-shadow: 0 10px $color-shadow-secondary;
+    background-color: $color-brand-secondary;
+  }
+}
