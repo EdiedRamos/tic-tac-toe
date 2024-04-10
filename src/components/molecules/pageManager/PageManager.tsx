@@ -1,5 +1,4 @@
-import { Game } from "@/pages/game/Game";
-import { Menu } from "@/pages/menu/Menu";
+import { Game, Menu } from "@/pages";
 
 export const PageManager = () => {
   return (

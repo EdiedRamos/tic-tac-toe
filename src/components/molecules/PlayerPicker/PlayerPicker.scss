@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: $border-radius-primary;
+  border-radius: $border-radius-secondary;
   gap: 1rem;
   background-color: $temporal;
   padding: 1rem 0;
@@ -19,7 +19,7 @@
     display: flex;
     justify-content: center;
     gap: 1rem;
-    border-radius: $border-radius-primary;
+    border-radius: $border-radius-secondary;
     background-color: $color-brand-primary;
     padding: 1rem;
     width: 90%;

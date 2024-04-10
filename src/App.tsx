@@ -1,7 +1,12 @@
 import { PageManager } from "./components/molecules";
+import { Main } from "./components/atoms";
 
 const App = () => {
-  return <PageManager />;
+  return (
+    <Main>
+      <PageManager />
+    </Main>
+  );
 };
 
 export default App;

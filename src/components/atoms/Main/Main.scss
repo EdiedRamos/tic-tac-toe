@@ -1,0 +1,10 @@
+.main__container {
+  width: 95%;
+  margin: 0 auto;
+}
+
+@media (width >= 576px) {
+  .main__container {
+    width: 500px;
+  }
+}
