@@ -1,9 +1,5 @@
-.board-options {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-
-  button {
-    justify-self: center;
-  }
+.board-options__container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }

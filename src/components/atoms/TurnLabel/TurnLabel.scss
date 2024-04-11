@@ -1,0 +1,12 @@
+@import "/src/general/styles";
+
+.turn-label__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 5px $color-shadow-soft;
+  border-radius: $border-radius-primary;
+  background-color: $color-brand-soft;
+  padding: 0 1rem;
+  color: $color-text-primary;
+}

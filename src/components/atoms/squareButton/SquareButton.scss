@@ -2,16 +2,12 @@
 
 .square-button {
   box-shadow: 0 5px $color-shadow-soft;
-  border: none;
   border-radius: 8px;
   background-color: $color-brand-soft;
-  width: 100px;
-  height: 100px;
-
-  &:not(:disabled):hover {
-    opacity: 0.9;
-    cursor: pointer;
-  }
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  min-width: 50px;
+  max-width: 100px;
 
   &:not(:disabled):active {
     transform: translateY(5px);

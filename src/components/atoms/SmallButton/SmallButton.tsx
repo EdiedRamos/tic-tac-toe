@@ -1,18 +1,18 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
-import "./SquareButton.scss";
+import "./SmallButton.scss";
 
 type PropsType = {
   children?: ReactNode;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
-export const SquareButton = ({
+export const SmallButton = ({
   children,
   className = "",
   ...rest
 }: PropsType): JSX.Element => {
   return (
-    <button className={`button square-button ${className}`} {...rest}>
+    <button className={`button small-button ${className}`} {...rest}>
       {children}
     </button>
   );

@@ -15,9 +15,50 @@
 }
 
 .player-x {
-  color: white;
+  color: $color-brand-secondary;
 }
 
 .player-o {
-  color: #006fee;
+  color: $color-brand-ternary;
+}
+
+.background-primary {
+  background-color: $color-brand-primary;
+}
+
+.background-secondary {
+  background-color: $color-brand-secondary;
+}
+
+.background-ternary {
+  background-color: $color-brand-ternary;
+}
+
+.background-quaternary {
+  background-color: $color-brand-quaternary;
+}
+
+.color-primary {
+  color: $color-brand-primary;
+}
+
+.color-secondary {
+  color: $color-brand-secondary;
+}
+
+.color-ternary {
+  color: $color-brand-ternary;
+}
+
+.color-quaternary {
+  color: $color-brand-quaternary;
+}
+
+.button {
+  border: none;
+
+  &:not(:disabled):hover {
+    opacity: 0.7;
+    cursor: pointer;
+  }
 }

@@ -1,0 +1,15 @@
+.board-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+
+  button {
+    justify-self: center;
+  }
+}
+
+@media (width >= 578px) {
+  .board-options {
+    gap: 2rem;
+  }
+}

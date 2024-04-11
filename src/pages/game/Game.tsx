@@ -1,10 +1,5 @@
-import { BoardOptions, ScoreInfo } from "@/components/molecules";
+import { GameBoard } from "@/components/organisms";
 
 export const Game = (): JSX.Element => {
-  return (
-    <>
-      <BoardOptions />
-      <ScoreInfo />
-    </>
-  );
+  return <GameBoard />;
 };

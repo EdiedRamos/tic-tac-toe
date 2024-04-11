@@ -1,13 +1,13 @@
 import { ScoreLabel } from "@/components/atoms";
+
 import "./ScoreInfo.scss";
 
 export const ScoreInfo = () => {
-  return <></>;
   return (
     <div className="score-info">
-      <ScoreLabel title="X (YOU)" score={14} />
-      <ScoreLabel title="TIES" score={32} />
-      <ScoreLabel title="O (CPU)" score={11} />
+      <ScoreLabel className="background-secondary" title="X (YOU)" score={1} />
+      <ScoreLabel className="background-quaternary" title="TIES" score={2} />
+      <ScoreLabel className="background-ternary" title="O (CPU)" score={3} />
     </div>
   );
 };
