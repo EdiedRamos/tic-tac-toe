@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from "react";
 import { Player } from "@/models";
 import type { MarkType, PlayerType, ScreenType } from "@/types";
 import type { ReactNode } from "react";
-import { isThereAWinner, setTheWinner } from "./utils";
+import { boardStatus } from "./utils";
 
 interface GameContextI {
   board: Array<number>;
@@ -15,6 +15,7 @@ interface GameContextI {
   handleMark: (mark: MarkType) => void;
   handleStart: (playerBType: PlayerType) => void;
   handleSelect: (selectedIndex: number) => void;
+  handleReset: () => void;
 }
 
 export const GameContext = createContext<GameContextI | undefined>(undefined);
@@ -29,18 +30,22 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
   const [currentMark, setCurrentMark] = useState<MarkType>("x");
   const [draws, setDraws] = useState(0);
 
-  const [playerA, setPlayerA] = useState<Player>(
-    new Player("playerA", "human", "x")
-  );
-  const [playerB, setPlayerB] = useState<Player>(
-    new Player("playerB", "human", "o")
-  );
+  const [playerA, setPlayerA] = useState<Player>(Player.createBasePlayerA());
+  const [playerB, setPlayerB] = useState<Player>(Player.createBasePlayerB());
+
+  const resetBoard = () => {
+    setBoard(Array(9).fill(-1));
+  };
+
+  const handleReset = () => {
+    resetBoard();
+    setCurrentMark("x");
+    setPlayerA((player) => player.setScore(0));
+    setPlayerB((player) => player.setScore(0));
+  };
 
   const handleMark = (mark: MarkType) => {
-    setPlayerA((player) => {
-      const newPlayer = new Player(player.getLabel, player.getType, mark);
-      return newPlayer;
-    });
+    setPlayerA((player) => player.updateMark(mark));
   };
 
   const handleSelect = (selectedIndex: number) => {
@@ -54,32 +59,29 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
 
   const handleStart = (playerBType: PlayerType) => {
     const freeMark: MarkType = playerA.getMark === "o" ? "x" : "o";
-    let playerB: Player;
-    if (playerBType === "cpu") {
-      playerB = new Player("playerB", "cpu", freeMark);
-    } else {
-      playerB = new Player("playerB", "human", freeMark);
-    }
+    setPlayerB((player) => player.updateTypeAndMark(playerBType, freeMark));
     setPlayerB(playerB);
     setScreen("game");
   };
 
+  const handleWinner = () => {
+    if (playerA.getMark !== currentMark) {
+      setPlayerA((player) => player.wins());
+    } else {
+      setPlayerB((player) => player.wins());
+    }
+  };
+
   useEffect(() => {
-    const winner = isThereAWinner(board);
-    // * There is a winner
-    if (~winner) {
-      if (playerA.getMark !== currentMark) {
-        setTheWinner(playerA, setPlayerA);
-      } else {
-        setTheWinner(playerB, setPlayerB);
-      }
-      setBoard(Array(9).fill(-1));
-    }
-    // * It is a draw
-    else if (!board.some((value) => value === -1)) {
+    if (screen === "menu") return;
+    const status = boardStatus(board);
+    if (status.winner === null && status.isThereAFreeSquare) return;
+    if (status.winner !== null) {
+      handleWinner();
+    } else {
       setDraws((prev) => prev + 1);
-      setBoard(Array(9).fill(-1));
     }
+    resetBoard();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [board]);
 
@@ -95,6 +97,7 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
         handleStart,
         board,
         handleSelect,
+        handleReset,
       }}
     >
       {children}
