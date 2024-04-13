@@ -4,3 +4,4 @@ export { SmallButton } from "./SmallButton/SmallButton";
 export { TurnLabel } from "./TurnLabel/TurnLabel";
 export { ScoreLabel } from "./scoreLabel/ScoreLabel";
 export { SquareButton } from "./squareButton/SquareButton";
+export { RenderError } from "./RenderError/RenderError";

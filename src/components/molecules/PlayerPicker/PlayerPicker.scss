@@ -36,7 +36,8 @@
         font-size: 3.5rem;
       }
 
-      &:hover {
+      &:hover,
+      &.selected {
         cursor: pointer;
         background-color: $color-brand-quaternary;
 

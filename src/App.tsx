@@ -1,11 +1,16 @@
-import { PageManager } from "./components/molecules";
 import { Main } from "./components/atoms";
+import { ErrorBoundary, PageManager } from "./components/molecules";
+import { GameProvider } from "./contexts";
 
 const App = () => {
   return (
-    <Main>
-      <PageManager />
-    </Main>
+    <ErrorBoundary>
+      <Main>
+        <GameProvider>
+          <PageManager />
+        </GameProvider>
+      </Main>
+    </ErrorBoundary>
   );
 };
 

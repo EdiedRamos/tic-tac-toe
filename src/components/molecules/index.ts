@@ -4,3 +4,4 @@ export { GameMode } from "./GameMode/GameMode";
 export { PlayerPicker } from "./PlayerPicker/PlayerPIcker";
 export { PageManager } from "./pageManager/PageManager";
 export { ScoreInfo } from "./scoreInfo/ScoreInfo";
+export { ErrorBoundary } from "./ErrorBoundary/ErrorBoundary";
