@@ -1,18 +1,20 @@
-// TODO: Implement this
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 import { Player } from "@/models";
 import type { MarkType, PlayerType, ScreenType } from "@/types";
-import type { ReactNode } from "react";
+import type { Dispatch, ReactNode, SetStateAction } from "react";
+import { WINNING_MOVES } from "@/utils/constants";
 
 interface GameContextI {
+  board: Array<number>;
   screen: ScreenType;
-  turn: Player | null;
+  draws: number;
   currentMark: MarkType;
   playerA: Player;
-  playerB: Player | null;
+  playerB: Player;
   handleMark: (mark: MarkType) => void;
   handleStart: (playerBType: PlayerType) => void;
+  handleSelect: (selectedIndex: number) => void;
 }
 
 export const GameContext = createContext<GameContextI | undefined>(undefined);
@@ -23,18 +25,45 @@ interface GameProviderI {
 
 export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
   const [screen, setScreen] = useState<ScreenType>("menu");
-  const [turn, setTurn] = useState<Player | null>(null);
+  const [board, setBoard] = useState<Array<number>>(Array(9).fill(-1));
   const [currentMark, setCurrentMark] = useState<MarkType>("x");
+  const [draws, setDraws] = useState(0);
+
   const [playerA, setPlayerA] = useState<Player>(
     new Player("playerA", "human", "x")
   );
-  const [playerB, setPlayerB] = useState<Player | null>(null);
+  const [playerB, setPlayerB] = useState<Player>(
+    new Player("playerB", "human", "o")
+  );
 
   const handleMark = (mark: MarkType) => {
     setPlayerA((player) => {
       const newPlayer = new Player(player.getLabel, player.getType, mark);
       return newPlayer;
     });
+  };
+
+  const setTheWinner = (
+    player: Player,
+    setter: Dispatch<SetStateAction<Player>>
+  ) => {
+    const newPlayer = new Player(
+      player.getLabel,
+      player.getType,
+      player.getMark,
+      player.getScore
+    );
+    newPlayer.wins();
+    setter(newPlayer);
+  };
+
+  const handleSelect = (selectedIndex: number) => {
+    setBoard((prev) =>
+      prev.map((val, index) =>
+        index === selectedIndex ? (currentMark === "x" ? 1 : 0) : val
+      )
+    );
+    setCurrentMark((prev) => (prev === "x" ? "o" : "x"));
   };
 
   const handleStart = (playerBType: PlayerType) => {
@@ -49,58 +78,50 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
     setScreen("game");
   };
 
+  const isThereAWinner = (board: Array<number>): number => {
+    for (const move of WINNING_MOVES) {
+      const [a, b, c] = move;
+      if (board[a] === board[b] && board[b] === board[c] && ~board[a]) {
+        return board[a];
+      }
+    }
+    return -1;
+  };
+
+  useEffect(() => {
+    const winner = isThereAWinner(board);
+    // * There is a winner
+    if (~winner) {
+      if (playerA.getMark !== currentMark) {
+        setTheWinner(playerA, setPlayerA);
+      } else {
+        setTheWinner(playerB, setPlayerB);
+      }
+      setBoard(Array(9).fill(-1));
+    }
+    // * It is a draw
+    else if (!board.some((value) => value === -1)) {
+      setDraws((prev) => prev + 1);
+      setBoard(Array(9).fill(-1));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [board]);
+
   return (
     <GameContext.Provider
       value={{
+        draws,
         screen,
-        turn,
         currentMark,
         playerA,
         playerB,
         handleMark,
         handleStart,
+        board,
+        handleSelect,
       }}
     >
       {children}
     </GameContext.Provider>
   );
 };
-
-// const [board, setBoard] = useState<Array<number>>(Array(9).fill(-1));
-//   const [turn, setTurn] = useState<boolean>(false);
-//   const [arePlaying, setArePlaying] = useState(true);
-//   const [gameLabel, setGameLabel] = useState<string>("...");
-//   const [wins, setWins] = useState(0);
-//   const [loses, setLoses] = useState(0);
-//   const [draw, setDraw] = useState(0);
-
-// const handleSelect = (selectedIndex: number) => {
-//   setBoard((prev) =>
-//     prev.map((val, index) => (index === selectedIndex ? (turn ? 1 : 0) : val))
-//   );
-//   setTurn((prev) => !prev);
-// };
-
-// useEffect(() => {
-//   const winner = isThereAWinner(board);
-//   if (~winner) {
-//     setGameLabel(`Gano ${winner === 0 ? "O" : "X"}`);
-//     if (winner === 0) setWins((prev) => prev + 1);
-//     else setLoses((prev) => prev + 1);
-//     setArePlaying(false);
-//   } else if (!board.some((value) => value === -1)) {
-//     setGameLabel("Empate");
-//     setDraw((prev) => prev + 1);
-//     setArePlaying(false);
-//   }
-// }, [board]);
-
-// const isThereAWinner = (board: Array<number>): number => {
-//   for (const move of WINNING_MOVES) {
-//     const [a, b, c] = move;
-//     if (board[a] === board[b] && board[b] === board[c] && ~board[a]) {
-//       return board[a];
-//     }
-//   }
-//   return -1;
-// };

@@ -1,7 +1,7 @@
 import { useGame } from "@/hooks";
 
 export const useScoreInfo = () => {
-  const { playerA, playerB } = useGame();
+  const { playerA, playerB, draws } = useGame();
 
   const getXPlayer = () => {
     return playerA.getMark === "x" ? playerA : playerB;
@@ -32,5 +32,6 @@ export const useScoreInfo = () => {
     getOLabel,
     getXScore,
     getOScore,
+    draws,
   };
 };

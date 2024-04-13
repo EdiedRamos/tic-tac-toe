@@ -2,18 +2,20 @@ import { SquareButton } from "@/components/atoms";
 import { Icons } from "@/general/icons";
 
 import "./BoardGrid.scss";
+import { useGame } from "@/hooks";
 
 const { LetterO, LetterX } = Icons;
 
 export const BoardGrid = () => {
-  const board = Array(9).fill(-1);
+  const { board, handleSelect } = useGame();
 
   return (
     <div className="board-options">
       {board.map((value, index) => (
         <SquareButton
           key={index}
-          onClick={() => {}}
+          onClick={() => handleSelect(index)}
+          disabled={!!~value}
           // disabled={!!~value || !arePlaying}
         >
           {value === 0 ? (

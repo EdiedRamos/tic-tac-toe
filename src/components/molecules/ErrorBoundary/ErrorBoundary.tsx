@@ -25,7 +25,6 @@ export class ErrorBoundary extends Component<
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-    console.log({ error });
     this.setState({
       hasError: true,
       errorMessage: JSON.stringify({ message: error.message, ...errorInfo }),

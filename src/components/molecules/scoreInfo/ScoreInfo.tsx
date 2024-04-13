@@ -4,7 +4,7 @@ import { useScoreInfo } from "./useScoreInfo";
 import "./ScoreInfo.scss";
 
 export const ScoreInfo = () => {
-  const { getXLabel, getOLabel, getXScore, getOScore } = useScoreInfo();
+  const { getXLabel, getOLabel, getXScore, getOScore, draws } = useScoreInfo();
 
   return (
     <div className="score-info">
@@ -13,7 +13,11 @@ export const ScoreInfo = () => {
         title={getXLabel()}
         score={getXScore()}
       />
-      <ScoreLabel className="background-quaternary" title="TIES" score={0} />
+      <ScoreLabel
+        className="background-quaternary"
+        title="TIES"
+        score={draws}
+      />
       <ScoreLabel
         className="background-ternary"
         title={getOLabel()}

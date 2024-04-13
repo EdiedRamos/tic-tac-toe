@@ -6,10 +6,15 @@ export class Player {
   private score: number;
   private mark: MarkType;
 
-  constructor(label: PlayerLabel, type: PlayerType, mark: MarkType) {
+  constructor(
+    label: PlayerLabel,
+    type: PlayerType,
+    mark: MarkType,
+    score: number = 0
+  ) {
     this.label = label;
     this.type = type;
-    this.score = 0;
+    this.score = score;
     this.mark = mark;
   }
 
