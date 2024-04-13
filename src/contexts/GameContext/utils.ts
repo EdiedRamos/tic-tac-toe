@@ -1,3 +1,4 @@
+import { MarkType } from "@/types";
 import { WINNING_MOVES } from "@/utils/constants";
 
 interface BoardStatus {
@@ -19,4 +20,8 @@ export const boardStatus = (board: Array<number>): BoardStatus => {
     }
   }
   return response;
+};
+
+export const getOppositeMark = (mark: MarkType): MarkType => {
+  return mark === "x" ? "o" : "x";
 };

@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from "react";
 import { Player } from "@/models";
 import type { MarkType, PlayerType, ScreenType } from "@/types";
 import type { ReactNode } from "react";
-import { boardStatus } from "./utils";
+import { boardStatus, getOppositeMark } from "./utils";
 
 interface GameContextI {
   board: Array<number>;
@@ -54,11 +54,11 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
         index === selectedIndex ? (currentMark === "x" ? 1 : 0) : val
       )
     );
-    setCurrentMark((prev) => (prev === "x" ? "o" : "x"));
+    setCurrentMark((prev) => getOppositeMark(prev));
   };
 
   const handleStart = (playerBType: PlayerType) => {
-    const freeMark: MarkType = playerA.getMark === "o" ? "x" : "o";
+    const freeMark = getOppositeMark(playerA.getMark);
     setPlayerB((player) => player.updateTypeAndMark(playerBType, freeMark));
     setPlayerB(playerB);
     setScreen("game");
