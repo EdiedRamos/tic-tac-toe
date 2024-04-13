@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from "react";
 import { Player } from "@/models";
 import type { MarkType, PlayerType, ScreenType } from "@/types";
 import type { ReactNode } from "react";
-import { boardStatus, getOppositeMark } from "./utils";
+import { boardStatus, generateArray, getOppositeMark } from "./utils";
 
 interface GameContextI {
   board: Array<number>;
@@ -26,7 +26,7 @@ interface GameProviderI {
 
 export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
   const [screen, setScreen] = useState<ScreenType>("menu");
-  const [board, setBoard] = useState<Array<number>>(Array(9).fill(-1));
+  const [board, setBoard] = useState<Array<number>>(generateArray(9, -1));
   const [currentMark, setCurrentMark] = useState<MarkType>("x");
   const [draws, setDraws] = useState(0);
 
@@ -34,7 +34,7 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
   const [playerB, setPlayerB] = useState<Player>(Player.createBasePlayerB());
 
   const resetBoard = () => {
-    setBoard(Array(9).fill(-1));
+    setBoard(generateArray(9, -1));
   };
 
   const handleReset = () => {

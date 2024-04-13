@@ -25,3 +25,10 @@ export const boardStatus = (board: Array<number>): BoardStatus => {
 export const getOppositeMark = (mark: MarkType): MarkType => {
   return mark === "x" ? "o" : "x";
 };
+
+export const generateArray = (
+  length: number,
+  initialValue: number
+): Array<number> => {
+  return Array(length).fill(initialValue);
+};
