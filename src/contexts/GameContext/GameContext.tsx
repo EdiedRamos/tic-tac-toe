@@ -2,8 +2,8 @@ import { createContext, useEffect, useState } from "react";
 
 import { Player } from "@/models";
 import type { MarkType, PlayerType, ScreenType } from "@/types";
-import type { Dispatch, ReactNode, SetStateAction } from "react";
-import { WINNING_MOVES } from "@/utils/constants";
+import type { ReactNode } from "react";
+import { isThereAWinner, setTheWinner } from "./utils";
 
 interface GameContextI {
   board: Array<number>;
@@ -43,20 +43,6 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
     });
   };
 
-  const setTheWinner = (
-    player: Player,
-    setter: Dispatch<SetStateAction<Player>>
-  ) => {
-    const newPlayer = new Player(
-      player.getLabel,
-      player.getType,
-      player.getMark,
-      player.getScore
-    );
-    newPlayer.wins();
-    setter(newPlayer);
-  };
-
   const handleSelect = (selectedIndex: number) => {
     setBoard((prev) =>
       prev.map((val, index) =>
@@ -76,16 +62,6 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
     }
     setPlayerB(playerB);
     setScreen("game");
-  };
-
-  const isThereAWinner = (board: Array<number>): number => {
-    for (const move of WINNING_MOVES) {
-      const [a, b, c] = move;
-      if (board[a] === board[b] && board[b] === board[c] && ~board[a]) {
-        return board[a];
-      }
-    }
-    return -1;
   };
 
   useEffect(() => {
