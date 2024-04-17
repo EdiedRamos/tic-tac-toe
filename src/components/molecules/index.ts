@@ -1,7 +1,7 @@
-export { BoardGrid } from "./BoardGrid/BoardGrid";
-export { BoardOptions } from "./BoardOptions/BoardOptions";
-export { GameMode } from "./GameMode/GameMode";
+export { BoardGrid } from "./boardGrid/BoardGrid";
+export { BoardOptions } from "./boardOptions/BoardOptions";
+export { GameMode } from "./gameMode/GameMode";
 export { PlayerPicker } from "./PlayerPicker/PlayerPIcker";
 export { PageManager } from "./pageManager/PageManager";
 export { ScoreInfo } from "./scoreInfo/ScoreInfo";
-export { ErrorBoundary } from "./ErrorBoundary/ErrorBoundary";
+export { ErrorBoundary } from "./errorBoundary/ErrorBoundary";
