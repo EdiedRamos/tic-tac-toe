@@ -42,6 +42,8 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
   const [playerA, setPlayerA] = useState<Player>(Player.createBasePlayerA());
   const [playerB, setPlayerB] = useState<Player>(Player.createBasePlayerB());
 
+  // console.log({ playerA, playerB });
+
   const resetBoard = () => {
     setBoard(generateArray(9, -1));
   };
@@ -70,7 +72,6 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
   const handleStart = (playerBType: PlayerType) => {
     const freeMark = getOppositeMark(playerA.getMark);
     setPlayerB((player) => player.updateTypeAndMark(playerBType, freeMark));
-    setPlayerB(playerB);
     setScreen("game");
   };
 
