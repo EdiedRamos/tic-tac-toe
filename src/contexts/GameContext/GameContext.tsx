@@ -15,6 +15,7 @@ interface GameContextI {
   currentMark: MarkType;
   playerA: Player;
   playerB: Player;
+  winner: Player | null;
   handleMark: (mark: MarkType) => void;
   handleStart: (playerBType: PlayerType) => void;
   handleSelect: (selectedIndex: number) => void;
@@ -41,8 +42,10 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
 
   const [playerA, setPlayerA] = useState<Player>(Player.createBasePlayerA());
   const [playerB, setPlayerB] = useState<Player>(Player.createBasePlayerB());
+  const [winner, setWinner] = useState<Player | null>(null);
 
   // console.log({ playerA, playerB });
+  // console.log({ winner });
 
   const resetBoard = () => {
     setBoard(generateArray(9, -1));
@@ -55,6 +58,7 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
     setPlayerB((player) => player.setScore(0));
     setIsOver(false);
     setDraws(0);
+    setWinner(null);
   };
 
   const handleMark = (mark: MarkType) => {
@@ -78,9 +82,17 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
 
   const handleWinner = () => {
     if (playerA.getMark !== currentMark) {
-      setPlayerA((player) => player.wins());
+      setPlayerA((player) => {
+        const newPlayerA = player.wins();
+        setWinner(newPlayerA);
+        return newPlayerA;
+      });
     } else {
-      setPlayerB((player) => player.wins());
+      setPlayerB((player) => {
+        const newPlayerB = player.wins();
+        setWinner(newPlayerB);
+        return newPlayerB;
+      });
     }
   };
 
@@ -104,6 +116,7 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
       handleWinner();
     } else {
       setDraws((prev) => prev + 1);
+      setWinner(null);
     }
     setBodyContent(<EndOfGame />);
     openModal();
@@ -121,6 +134,7 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
         currentMark,
         playerA,
         playerB,
+        winner,
         handleMark,
         handleStart,
         board,
