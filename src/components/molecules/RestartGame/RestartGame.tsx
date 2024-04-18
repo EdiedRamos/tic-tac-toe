@@ -1,17 +1,8 @@
-import { useUI } from "@/hooks";
-
 import "./RestartGame.scss";
+import { RestartGameController } from "./RestartGameController";
 
 export const RestartGame = () => {
-  const { closeModal } = useUI();
-
-  const handleAccept = () => {
-    closeModal();
-  };
-
-  const handleCancel = () => {
-    closeModal();
-  };
+  const { handleAccept, handleCancel } = RestartGameController();
 
   return (
     <div className="restart-game restart-game__container">
