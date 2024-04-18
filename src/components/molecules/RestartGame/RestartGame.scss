@@ -1,0 +1,52 @@
+@import "/src/general/styles/index.scss";
+
+.restart-game {
+  &__container {
+    margin: 2rem;
+    background: inherit;
+  }
+
+  &__title {
+    background-color: inherit;
+    color: $color-text-primary;
+    text-align: center;
+  }
+
+  &__controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    background-color: inherit;
+  }
+
+  &__cancel,
+  &__restart {
+    border: none;
+    border-radius: $border-radius-primary;
+    padding: 1rem;
+    color: $color-brand-soft;
+    font-weight: bold;
+    font-size: 1rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:active {
+      transform: translateY(5px);
+      box-shadow: none;
+    }
+  }
+
+  &__cancel {
+    box-shadow: 0 5px 0 $color-shadow-quaternary;
+    background-color: $color-brand-quaternary;
+  }
+
+  &__restart {
+    box-shadow: 0 5px 0 $color-shadow-ternary;
+    background-color: $color-brand-ternary;
+  }
+}

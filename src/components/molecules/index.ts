@@ -1,4 +1,5 @@
 export { PlayerPicker } from "./PlayerPicker/PlayerPIcker";
+export { RestartGame } from "./RestartGame/RestartGame";
 export { BoardGrid } from "./boardGrid/BoardGrid";
 export { BoardOptions } from "./boardOptions/BoardOptions";
 export { ErrorBoundary } from "./errorBoundary/ErrorBoundary";

@@ -3,12 +3,18 @@ import { Icons } from "@/general/icons";
 import { useGame, useUI } from "@/hooks";
 
 import "./BoardOptions.scss";
+import { RestartGame } from "../RestartGame/RestartGame";
 
 const { LetterO, LetterX } = Icons;
 
 export const BoardOptions = () => {
   const { currentMark } = useGame();
-  const { openModal } = useUI();
+  const { openModal, setBodyContent } = useUI();
+
+  const handleRestart = () => {
+    setBodyContent(<RestartGame />);
+    openModal();
+  };
 
   return (
     <div className="board-options__container">
@@ -23,7 +29,7 @@ export const BoardOptions = () => {
           TURN
         </span>
       </TurnLabel>
-      <SmallButton disabled={false} onClick={openModal}>
+      <SmallButton disabled={false} onClick={handleRestart}>
         <Icons.Reload className="icon" style={{ fontSize: "1.5rem" }} />
       </SmallButton>
     </div>
