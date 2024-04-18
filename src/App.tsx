@@ -7,12 +7,12 @@ const App = () => {
   return (
     <ErrorBoundary>
       <UIProvider>
-        <Modal />
-        <Main>
-          <GameProvider>
+        <GameProvider>
+          <Modal />
+          <Main>
             <PageManager />
-          </GameProvider>
-        </Main>
+          </Main>
+        </GameProvider>
       </UIProvider>
     </ErrorBoundary>
   );

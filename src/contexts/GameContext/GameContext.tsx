@@ -21,6 +21,7 @@ interface GameContextI {
   handleReset: () => void;
   resetBoard: () => void;
   quitGame: () => void;
+  nextRound: () => void;
 }
 
 export const GameContext = createContext<GameContextI | undefined>(undefined);
@@ -30,7 +31,7 @@ interface GameProviderI {
 }
 
 export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
-  const { setBodyContent, openModal } = useUI();
+  const { setBodyContent, openModal, closeModal } = useUI();
 
   const [isOver, setIsOver] = useState(false);
   const [screen, setScreen] = useState<ScreenType>("menu");
@@ -81,7 +82,16 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
   };
 
   const quitGame = () => {
+    closeModal();
     setScreen("menu");
+    resetBoard();
+    setIsOver(false);
+  };
+
+  const nextRound = () => {
+    resetBoard();
+    setIsOver(false);
+    closeModal();
   };
 
   useEffect(() => {
@@ -116,6 +126,7 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
         handleReset,
         resetBoard,
         quitGame,
+        nextRound,
       }}
     >
       {children}
