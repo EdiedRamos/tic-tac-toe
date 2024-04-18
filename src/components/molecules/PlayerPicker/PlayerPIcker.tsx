@@ -1,7 +1,7 @@
 import { Icons } from "@/general/icons";
 
 import "./PlayerPicker.scss";
-import { useGame } from "@/hooks/Game/useGame";
+import { useGame } from "@/hooks";
 
 export const PlayerPicker = () => {
   const { playerA, handleMark } = useGame();

@@ -1,1 +1,2 @@
-export { useGame } from "./Game/useGame";
+export { useGame } from "./useGame";
+export { useUI } from "./useUI";

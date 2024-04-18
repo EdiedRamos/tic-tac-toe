@@ -1,15 +1,19 @@
 import { Main } from "./components/atoms";
-import { ErrorBoundary, PageManager } from "./components/molecules";
+import { ErrorBoundary, Modal, PageManager } from "./components/molecules";
 import { GameProvider } from "./contexts";
+import { UIProvider } from "./providers";
 
 const App = () => {
   return (
     <ErrorBoundary>
-      <Main>
-        <GameProvider>
-          <PageManager />
-        </GameProvider>
-      </Main>
+      <UIProvider>
+        <Modal />
+        <Main>
+          <GameProvider>
+            <PageManager />
+          </GameProvider>
+        </Main>
+      </UIProvider>
     </ErrorBoundary>
   );
 };

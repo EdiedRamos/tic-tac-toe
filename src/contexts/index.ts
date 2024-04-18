@@ -1,2 +1,2 @@
-export { GameContext } from "./GameContext/GameContext";
-export { GameProvider } from "./GameContext/GameContext";
+export { GameContext, GameProvider } from "./GameContext/GameContext";
+export { UIContext } from "./UIContext/UIContext";

@@ -1,4 +1,4 @@
-import { useGame } from "@/hooks/Game/useGame";
+import { useGame } from "@/hooks";
 import "./GameMode.scss";
 
 export const GameMode = () => {

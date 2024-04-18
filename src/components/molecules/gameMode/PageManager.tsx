@@ -1,7 +1,7 @@
-import { useGame } from "@/hooks";
+import { ternary } from "@/hooks";
 import { Game, Menu } from "@/pages";
 
 export const PageManager = () => {
-  const { screen } = useGame();
+  const { screen } = ternary();
   return <>{screen === "menu" ? <Menu /> : <Game />}</>;
 };

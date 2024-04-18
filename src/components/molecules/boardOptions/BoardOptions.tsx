@@ -1,6 +1,6 @@
 import { Logo, SmallButton, TurnLabel } from "@/components/atoms";
 import { Icons } from "@/general/icons";
-import { useGame } from "@/hooks";
+import { useGame, useUI } from "@/hooks";
 
 import "./BoardOptions.scss";
 
@@ -8,6 +8,7 @@ const { LetterO, LetterX } = Icons;
 
 export const BoardOptions = () => {
   const { currentMark } = useGame();
+  const { openModal } = useUI();
 
   return (
     <div className="board-options__container">
@@ -22,7 +23,7 @@ export const BoardOptions = () => {
           TURN
         </span>
       </TurnLabel>
-      <SmallButton disabled={false} onClick={() => {}}>
+      <SmallButton disabled={false} onClick={openModal}>
         <Icons.Reload className="icon" style={{ fontSize: "1.5rem" }} />
       </SmallButton>
     </div>
