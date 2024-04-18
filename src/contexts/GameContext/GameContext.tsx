@@ -51,6 +51,7 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
     setCurrentMark("x");
     setPlayerA((player) => player.setScore(0));
     setPlayerB((player) => player.setScore(0));
+    setIsOver(false);
   };
 
   const handleMark = (mark: MarkType) => {
@@ -84,8 +85,7 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
   const quitGame = () => {
     closeModal();
     setScreen("menu");
-    resetBoard();
-    setIsOver(false);
+    handleReset();
   };
 
   const nextRound = () => {
