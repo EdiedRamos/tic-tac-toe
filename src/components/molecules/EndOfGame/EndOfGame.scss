@@ -1,0 +1,61 @@
+@import "/src/general/styles/index.scss";
+
+.end-of-game {
+  &__container {
+    background-color: inherit;
+    margin: 2rem;
+  }
+
+  &__title,
+  &__text {
+    background-color: inherit;
+    text-align: center;
+    color: $color-text-primary;
+    font-size: 1rem;
+  }
+
+  &__text {
+    margin-top: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: $color-brand-secondary;
+  }
+
+  &__controls {
+    margin-top: 1.5rem;
+    background-color: inherit;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  &__quit,
+  &__next-round {
+    border: none;
+    border-radius: $border-radius-primary;
+    padding: 1rem;
+    color: $color-brand-soft;
+    font-weight: bold;
+    font-size: 1rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:active {
+      transform: translateY(5px);
+      box-shadow: none;
+    }
+  }
+
+  &__quit {
+    box-shadow: 0 5px 0 $color-shadow-quaternary;
+    background-color: $color-brand-quaternary;
+  }
+
+  &__next-round {
+    box-shadow: 0 5px 0 $color-shadow-ternary;
+    background-color: $color-brand-ternary;
+  }
+}

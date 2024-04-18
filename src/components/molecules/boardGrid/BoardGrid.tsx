@@ -7,7 +7,7 @@ import { useGame } from "@/hooks";
 const { LetterO, LetterX } = Icons;
 
 export const BoardGrid = () => {
-  const { board, handleSelect } = useGame();
+  const { board, handleSelect, isOver } = useGame();
 
   return (
     <div className="board-options">
@@ -15,8 +15,7 @@ export const BoardGrid = () => {
         <SquareButton
           key={index}
           onClick={() => handleSelect(index)}
-          disabled={!!~value}
-          // disabled={!!~value || !arePlaying}
+          disabled={!!~value || isOver}
         >
           {value === 0 ? (
             <LetterO className="icon player-o" />

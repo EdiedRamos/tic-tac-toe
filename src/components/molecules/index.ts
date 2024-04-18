@@ -1,3 +1,4 @@
+export { EndOfGame } from "./EndOfGame/EndOfGame";
 export { PlayerPicker } from "./PlayerPicker/PlayerPIcker";
 export { RestartGame } from "./RestartGame/RestartGame";
 export { BoardGrid } from "./boardGrid/BoardGrid";

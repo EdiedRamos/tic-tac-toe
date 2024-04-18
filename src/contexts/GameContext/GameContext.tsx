@@ -4,8 +4,11 @@ import { Player } from "@/models";
 import type { MarkType, PlayerType, ScreenType } from "@/types";
 import type { ReactNode } from "react";
 import { boardStatus, generateArray, getOppositeMark } from "./utils";
+import { useUI } from "@/hooks";
+import { EndOfGame } from "@/components/molecules";
 
 interface GameContextI {
+  isOver: boolean;
   board: Array<number>;
   screen: ScreenType;
   draws: number;
@@ -16,6 +19,8 @@ interface GameContextI {
   handleStart: (playerBType: PlayerType) => void;
   handleSelect: (selectedIndex: number) => void;
   handleReset: () => void;
+  resetBoard: () => void;
+  quitGame: () => void;
 }
 
 export const GameContext = createContext<GameContextI | undefined>(undefined);
@@ -25,6 +30,9 @@ interface GameProviderI {
 }
 
 export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
+  const { setBodyContent, openModal } = useUI();
+
+  const [isOver, setIsOver] = useState(false);
   const [screen, setScreen] = useState<ScreenType>("menu");
   const [board, setBoard] = useState<Array<number>>(generateArray(9, -1));
   const [currentMark, setCurrentMark] = useState<MarkType>("x");
@@ -72,6 +80,10 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
     }
   };
 
+  const quitGame = () => {
+    setScreen("menu");
+  };
+
   useEffect(() => {
     if (screen === "menu") return;
     const status = boardStatus(board);
@@ -81,13 +93,17 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
     } else {
       setDraws((prev) => prev + 1);
     }
-    resetBoard();
+    setBodyContent(<EndOfGame />);
+    openModal();
+    setIsOver(true);
+    // resetBoard();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [board]);
 
   return (
     <GameContext.Provider
       value={{
+        isOver,
         draws,
         screen,
         currentMark,
@@ -98,6 +114,8 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
         board,
         handleSelect,
         handleReset,
+        resetBoard,
+        quitGame,
       }}
     >
       {children}
