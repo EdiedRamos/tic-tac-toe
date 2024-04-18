@@ -54,6 +54,7 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
     setPlayerA((player) => player.setScore(0));
     setPlayerB((player) => player.setScore(0));
     setIsOver(false);
+    setDraws(0);
   };
 
   const handleMark = (mark: MarkType) => {
