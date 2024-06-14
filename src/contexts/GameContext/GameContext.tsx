@@ -1,11 +1,11 @@
+import type { MarkType, PlayerType, ScreenType } from "@/types";
+import { boardStatus, generateArray, getOppositeMark } from "./utils";
 import { createContext, useEffect, useState } from "react";
 
-import { Player } from "@/models";
-import type { MarkType, PlayerType, ScreenType } from "@/types";
-import type { ReactNode } from "react";
-import { boardStatus, generateArray, getOppositeMark } from "./utils";
-import { useUI } from "@/hooks";
 import { EndOfGame } from "@/components/molecules";
+import { Player } from "@/models";
+import type { ReactNode } from "react";
+import { useUI } from "@/hooks";
 
 interface GameContextI {
   isOver: boolean;
@@ -16,6 +16,7 @@ interface GameContextI {
   playerA: Player;
   playerB: Player;
   winner: Player | null;
+  isMachineTurn: boolean;
   handleMark: (mark: MarkType) => void;
   handleStart: (playerBType: PlayerType) => void;
   handleSelect: (selectedIndex: number) => void;
@@ -39,6 +40,8 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
   const [board, setBoard] = useState<Array<number>>(generateArray(9, -1));
   const [currentMark, setCurrentMark] = useState<MarkType>("x");
   const [draws, setDraws] = useState(0);
+
+  const [isMachineTurn, setIsMachineTurn] = useState<boolean>(false);
 
   const [playerA, setPlayerA] = useState<Player>(Player.createBasePlayerA());
   const [playerB, setPlayerB] = useState<Player>(Player.createBasePlayerB());
@@ -125,6 +128,17 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [board]);
 
+  // * Control machine
+
+  useEffect(() => {
+    // * The machine always will be the playerB
+    console.log("game start");
+    if (!playerB.isMachine || playerB.getMark !== currentMark) return;
+
+    console.log("MACHINE THINKING");
+    setIsMachineTurn(true);
+  }, [currentMark, playerA, playerB]);
+
   return (
     <GameContext.Provider
       value={{
@@ -135,6 +149,7 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
         playerA,
         playerB,
         winner,
+        isMachineTurn,
         handleMark,
         handleStart,
         board,

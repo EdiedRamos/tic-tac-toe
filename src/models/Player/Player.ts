@@ -38,6 +38,10 @@ export class Player {
     return this.mark;
   }
 
+  get isMachine() {
+    return this.getType === "cpu";
+  }
+
   // * NO MUTATION METHODS
 
   public setScore(score: number): Player {
