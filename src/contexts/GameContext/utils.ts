@@ -4,12 +4,14 @@ import { WINNING_MOVES } from "@/utils/constants";
 interface BoardStatus {
   winner: number | null;
   isThereAFreeSquare: boolean;
+  isEmpty: boolean;
 }
 
 export const boardStatus = (board: Array<number>): BoardStatus => {
   const response: BoardStatus = {
     winner: null,
     isThereAFreeSquare: false,
+    isEmpty: true,
   };
   for (const move of WINNING_MOVES) {
     const [a, b, c] = move;
@@ -19,6 +21,7 @@ export const boardStatus = (board: Array<number>): BoardStatus => {
       response.winner = board[a];
     }
   }
+  if (board.some((value) => ~value)) response.isEmpty = false;
   return response;
 };
 

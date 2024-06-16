@@ -74,7 +74,6 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
         index === selectedIndex ? (currentMark === "x" ? 1 : 0) : val
       )
     );
-    setCurrentMark((prev) => getOppositeMark(prev));
   };
 
   const handleStart = (playerBType: PlayerType) => {
@@ -84,7 +83,7 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
   };
 
   const handleWinner = () => {
-    if (playerA.getMark !== currentMark) {
+    if (playerA.getMark === currentMark) {
       setPlayerA((player) => {
         const newPlayerA = player.wins();
         setWinner(newPlayerA);
@@ -109,12 +108,17 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
     resetBoard();
     setIsOver(false);
     closeModal();
+    setCurrentMark((prev) => getOppositeMark(prev));
   };
 
   useEffect(() => {
     if (screen === "menu") return;
     const status = boardStatus(board);
-    if (status.winner === null && status.isThereAFreeSquare) return;
+    if (status.isEmpty) return;
+    if (status.winner === null && status.isThereAFreeSquare) {
+      setCurrentMark((prev) => getOppositeMark(prev));
+      return;
+    }
     if (status.winner !== null) {
       handleWinner();
     } else {
@@ -124,20 +128,19 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
     setBodyContent(<EndOfGame />);
     openModal();
     setIsOver(true);
-    // resetBoard();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [board]);
 
   // * Control machine
-
   useEffect(() => {
     // * The machine always will be the playerB
-    console.log("game start");
+    if (isOver) return;
     if (!playerB.isMachine || playerB.getMark !== currentMark) return;
 
-    console.log("MACHINE THINKING");
-    setIsMachineTurn(true);
-  }, [currentMark, playerA, playerB]);
+    // ! EASY MACHINE | TEMPORAL HERE
+    const machineMove = board.findIndex((value) => !~value);
+    if (~machineMove) handleSelect(machineMove);
+  }, [currentMark, playerB]);
 
   return (
     <GameContext.Provider
