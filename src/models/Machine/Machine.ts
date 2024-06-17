@@ -11,27 +11,29 @@ export class Machine {
     return this.level;
   }
 
-  public async makeMove(board: number[]): Promise<number> {
+  // * Using random approach
+  private makeEasyMove(board: number[]): Promise<number> {
     return new Promise((resolve, reject) => {
-      let move: number = -1;
-      if (this.level === "easy") {
-        // * random approach
-        const freeSquares = board
-          .map((square, index) => (~square ? -1 : index))
-          .filter((square) => ~square);
-        if (freeSquares.length === 0) reject("Impossible to make the move");
-        move = freeSquares[Math.floor(Math.random() * freeSquares.length)];
-      }
-      if (this.level === "medium") {
-        // ! Pending
-        // * take between easy and hard
-      }
-      if (this.level === "hard") {
-        // ! Pending
-        // * minimax approach
-      }
+      const freeSquares = board
+        .map((square, index) => (~square ? -1 : index))
+        .filter((square) => ~square);
+      if (freeSquares.length === 0)
+        reject("Empty board for taking a random square");
+      const move = freeSquares[Math.floor(Math.random() * freeSquares.length)];
       resolve(move);
     });
+  }
+
+  public async makeMove(board: number[]): Promise<number> {
+    try {
+      if (this.level === "easy") {
+        return await this.makeEasyMove(board);
+      }
+      throw new Error("Couldn't make the move");
+    } catch (err) {
+      if (err instanceof Error) throw new Error(err.message);
+      throw new Error("Unknown error");
+    }
   }
 }
 
