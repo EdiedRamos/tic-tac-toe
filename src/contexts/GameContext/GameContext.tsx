@@ -5,6 +5,7 @@ import { createContext, useEffect, useState } from "react";
 import { EndOfGame } from "@/components/molecules";
 import { Player } from "@/models";
 import type { ReactNode } from "react";
+import { machine } from "@/models/Machine/Machine";
 import { useUI } from "@/hooks";
 
 interface GameContextI {
@@ -137,9 +138,13 @@ export const GameProvider = ({ children }: GameProviderI): JSX.Element => {
     if (isOver) return;
     if (!playerB.isMachine || playerB.getMark !== currentMark) return;
 
-    // ! EASY MACHINE | TEMPORAL HERE
-    const machineMove = board.findIndex((value) => !~value);
-    if (~machineMove) handleSelect(machineMove);
+    setIsMachineTurn(true);
+    machine.makeMove(board).then((machineMove) => {
+      if (~machineMove) {
+        handleSelect(machineMove);
+        setIsMachineTurn(false);
+      }
+    });
   }, [currentMark, playerB]);
 
   return (
